@@ -1,4 +1,4 @@
-package pl.domi.calculatortask.utilities;
+package pl.domi.calculatortask.test.utilities;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
