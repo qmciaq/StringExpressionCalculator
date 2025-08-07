@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseException;
+import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseInputException;
 
 class StringExpressionCalculatorTest {
 
@@ -21,7 +21,7 @@ class StringExpressionCalculatorTest {
 
   @ParameterizedTest
   @MethodSource("pl.domi.calculatortask.utilities.TestExceptionGeneratingExamplesUtility#provideStaticExamplesForTest")
-  void shouldThrowExpectedException(String expression, Class<? extends CalculatorBaseException> exceptionType) {
+  void shouldThrowExpectedException(String expression, Class<? extends CalculatorBaseInputException> exceptionType) {
     assertThrows(exceptionType, () -> testCompute(expression), "For expression '%s' the exception did not match".formatted(expression));
   }
 }

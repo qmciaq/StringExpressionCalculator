@@ -1,10 +1,10 @@
 package pl.domi.calculatortask.app.exceptions.input;
 
 import lombok.RequiredArgsConstructor;
-import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseException;
+import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseInputException;
 
 @RequiredArgsConstructor
-public class MalformedExpressionException extends CalculatorBaseException {
+public class MalformedExpressionInputException extends CalculatorBaseInputException {
 
   private final String expression;
 

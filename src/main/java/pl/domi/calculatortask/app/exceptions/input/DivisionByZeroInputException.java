@@ -1,10 +1,10 @@
 package pl.domi.calculatortask.app.exceptions.input;
 
 import lombok.RequiredArgsConstructor;
-import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseException;
+import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseInputException;
 
 @RequiredArgsConstructor
-public class DivisionByZeroException extends CalculatorBaseException {
+public class DivisionByZeroInputException extends CalculatorBaseInputException {
 
   @Override
   public String getMessage() {

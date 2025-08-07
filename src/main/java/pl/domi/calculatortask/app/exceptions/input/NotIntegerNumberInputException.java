@@ -1,10 +1,10 @@
 package pl.domi.calculatortask.app.exceptions.input;
 
 import lombok.RequiredArgsConstructor;
-import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseException;
+import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseInputException;
 
 @RequiredArgsConstructor
-public class NotIntegerNumberException extends CalculatorBaseException {
+public class NotIntegerNumberInputException extends CalculatorBaseInputException {
 
   private final String rawNumber;
 
