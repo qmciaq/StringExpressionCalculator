@@ -12,4 +12,8 @@ public class TestTaskStaticExamplesUtility {
   public static Stream<Arguments> provideStaticExamplesForTest() {
     return Stream.of(Arguments.of(EXAMPLE_1, 5), Arguments.of(EXAMPLE_2, 7), Arguments.of(EXAMPLE_3, 0));
   }
+
+  public static Stream<Arguments> provideDivisionCases() {
+    return Stream.of(Arguments.of("6 / 2", 3), Arguments.of("7 / 3", 2));
+  }
 }

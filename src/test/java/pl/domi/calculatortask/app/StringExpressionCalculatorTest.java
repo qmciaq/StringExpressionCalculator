@@ -20,6 +20,12 @@ class StringExpressionCalculatorTest {
   }
 
   @ParameterizedTest
+  @MethodSource("pl.domi.calculatortask.test.utilities.TestTaskStaticExamplesUtility#provideDivisionCases")
+  void shouldProperlyCalculateDivisions(String expression, int result) {
+    assertEquals(testCompute(expression), result, "Computed value is not equal to result");
+  }
+
+  @ParameterizedTest
   @MethodSource("pl.domi.calculatortask.test.utilities.TestExceptionGeneratingExamplesUtility#provideStaticExamplesForTest")
   void shouldThrowExpectedException(String expression, Class<? extends CalculatorBaseInputException> exceptionType) {
     assertThrows(exceptionType, () -> testCompute(expression), "For expression '%s' the exception did not match".formatted(expression));

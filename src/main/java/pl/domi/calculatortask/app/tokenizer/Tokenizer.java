@@ -31,13 +31,13 @@ public class Tokenizer {
         tokens.add(OperationToken.operator(OperatorMatcher.matchOperator(token)));
       }
     });
-    assertIsNotAnOperatorAtLastPlace(tokens);
+    assertOperatorIsNotFirstOrLast(tokens);
     return tokens;
   }
 
-  static void assertIsNotAnOperatorAtLastPlace(List<Token> tokens) {
-    if (!tokens.isEmpty() && tokens.getLast().isOperator()) {
-      throw new MalformedExpressionInputException("Expression cannot end with an operator");
+  static void assertOperatorIsNotFirstOrLast(List<Token> tokens) {
+    if (!tokens.isEmpty() && (tokens.getLast().isOperator() || tokens.getFirst().isOperator())) {
+      throw new MalformedExpressionInputException("Expression cannot start and end with an operator");
     }
   }
 

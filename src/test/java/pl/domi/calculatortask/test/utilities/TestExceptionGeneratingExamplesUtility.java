@@ -16,6 +16,7 @@ public class TestExceptionGeneratingExamplesUtility {
         Arguments.of("4 % 2", NotSupportedArithmeticOperatorInputException.class),
         Arguments.of("6 ^ 3", NotSupportedArithmeticOperatorInputException.class),
         Arguments.of("1 t 2", NotSupportedArithmeticOperatorInputException.class),
-        Arguments.of("12 *", MalformedExpressionInputException.class));
+        Arguments.of("12 *", MalformedExpressionInputException.class),
+        Arguments.of("/ 12", MalformedExpressionInputException.class));
   }
 }
