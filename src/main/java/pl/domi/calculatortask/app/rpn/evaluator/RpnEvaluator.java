@@ -22,7 +22,7 @@ public class RpnEvaluator {
       switch (token) {
         case NumericToken numericToken -> output.push(numericToken.value());
         case OperationToken operationToken -> {
-          Number left = output.pop(), right = output.pop();
+          Number right = output.pop(), left = output.pop();
           output.push(evaluate(operationToken.operator(), left, right));
         }
       }
