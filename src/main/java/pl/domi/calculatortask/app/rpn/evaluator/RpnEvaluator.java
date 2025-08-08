@@ -17,6 +17,14 @@ public class RpnEvaluator {
   static final Arithmetic<Integer> ARITHMETIC_STRATEGY = new IntArithmetic();
 
   public static Number evaluateRpn(List<Token> rpn) {
+    Deque<Number> output = evaluateRpnTokens(rpn);
+    if (output.size() != 1) {
+      throw new MalformedRpnException(rpn.toString());
+    }
+    return output.pop();
+  }
+
+  private static Deque<Number> evaluateRpnTokens(List<Token> rpn) {
     Deque<Number> output = new ArrayDeque<>();
     rpn.forEach(token -> {
       switch (token) {
@@ -27,10 +35,7 @@ public class RpnEvaluator {
         }
       }
     });
-    if (output.size() != 1) {
-      throw new MalformedRpnException(rpn.toString());
-    }
-    return output.pop();
+    return output;
   }
 
   private static Number evaluate(OperatorKind operator, Number left, Number right) {

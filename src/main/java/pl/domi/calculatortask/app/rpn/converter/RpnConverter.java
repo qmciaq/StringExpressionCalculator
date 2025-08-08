@@ -12,30 +12,34 @@ import pl.domi.calculatortask.app.tokenizer.kind.Token;
 public class RpnConverter {
 
   public static List<Token> toPostfix(List<Token> tokens) {
-    List<Token> out = new ArrayList<>();
-    Deque<OperatorKind> ops = new ArrayDeque<>();
+    List<Token> output = new ArrayList<>();
+    Deque<OperatorKind> operations = new ArrayDeque<>();
 
+    processTokens(tokens, output, operations);
+    while (!operations.isEmpty()) {
+      output.add(new OperationToken(operations.pop()));
+    }
+    return output;
+  }
+
+  private static void processTokens(List<Token> tokens, List<Token> output, Deque<OperatorKind> operations) {
     tokens.forEach(t -> {
       switch (t) {
-        case NumericToken nt -> out.add(nt);
+        case NumericToken nt -> output.add(nt);
         case OperationToken ot -> {
           OperatorKind in = ot.operator();
-          while (!ops.isEmpty() && shouldPop(ops.peek(), in)) {
-            out.add(new OperationToken(ops.pop()));
+          while (!operations.isEmpty() && shouldPop(operations.peek(), in)) {
+            output.add(new OperationToken(operations.pop()));
           }
-          ops.push(in);
+          operations.push(in);
         }
       }
     });
-    while (!ops.isEmpty()) {
-      out.add(new OperationToken(ops.pop()));
-    }
-    return out;
   }
 
-  private static boolean shouldPop(OperatorKind top, OperatorKind in) {
-    return in.isRightAssociative()
-        ? top.precedence() > in.precedence()
-        : top.precedence() >= in.precedence();
+  private static boolean shouldPop(OperatorKind top, OperatorKind incoming) {
+    return incoming.isRightAssociative()
+        ? top.precedence() > incoming.precedence()
+        : top.precedence() >= incoming.precedence();
   }
 }

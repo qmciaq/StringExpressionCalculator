@@ -4,20 +4,25 @@ import pl.domi.calculatortask.app.exceptions.input.DivisionByZeroInputException;
 
 public class IntArithmetic implements Arithmetic<Integer> {
 
-  private static int intValue(Number n) {
-    return n.intValue();
+  private static int intValue(Number value) {
+    return value.intValue();
   }
 
-  public Integer add(Number a, Number b) {
-    return Math.addExact(intValue(a), intValue(b));
+  @Override
+  public Integer coerce(Number value) {
+    return intValue(value);
   }
 
-  public Integer sub(Number a, Number b) {
-    return Math.subtractExact(intValue(a), intValue(b));
+  public Integer add(Number left, Number right) {
+    return Math.addExact(intValue(left), intValue(right));
   }
 
-  public Integer mul(Number a, Number b) {
-    return Math.multiplyExact(intValue(a), intValue(b));
+  public Integer sub(Number left, Number right) {
+    return Math.subtractExact(intValue(left), intValue(right));
+  }
+
+  public Integer mul(Number left, Number right) {
+    return Math.multiplyExact(intValue(left), intValue(right));
   }
 
   public Integer div(Number left, Number right) {

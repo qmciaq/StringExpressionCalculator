@@ -15,13 +15,14 @@ public enum OperatorKind implements Precedence {
   },
   MULTIPLY {
     public int precedence() {
-      return 2;
+      return MULTIPLY_DIVIDE_PRECEDENCE;
     }
   },
   DIVISION {
     public int precedence() {
-      return 2;
+      return MULTIPLY_DIVIDE_PRECEDENCE;
     }
   };
+  private static final int MULTIPLY_DIVIDE_PRECEDENCE = 2;
   private static final int LOWEST_PRECEDENCE = 1;
 }
