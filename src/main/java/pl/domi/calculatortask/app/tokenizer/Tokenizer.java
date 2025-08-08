@@ -37,7 +37,7 @@ public class Tokenizer {
 
   static void assertIsNotAnOperatorAtLastPlace(List<Token> tokens) {
     if (!tokens.isEmpty() && tokens.getLast().isOperator()) {
-      throw new MalformedExpressionInputException("Expression cannot end with an operator.");
+      throw new MalformedExpressionInputException("Expression cannot end with an operator");
     }
   }
 
