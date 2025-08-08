@@ -1,17 +1,22 @@
 package pl.domi.calculatortask.app;
 
-import pl.domi.calculatortask.app.tokenizer.TokenizationResult;
+import java.util.List;
+import pl.domi.calculatortask.app.rpn.converter.RpnConverter;
+import pl.domi.calculatortask.app.rpn.evaluator.RpnEvaluator;
 import pl.domi.calculatortask.app.tokenizer.Tokenizer;
+import pl.domi.calculatortask.app.tokenizer.kind.Token;
 
 public final class StringExpressionCalculator {
 
-  public static int calculate(String expression) {
+  public static Number calculate(String expression) {
     if (expression.isBlank()) {
       return 0;
     }
 
-    TokenizationResult tokens = Tokenizer.tokenize(expression);
-    return -1;
+    List<Token> tokens = Tokenizer.tokenize(expression);
+    List<Token> postFixRpn = RpnConverter.toPostfix(tokens);
+    Number result = RpnEvaluator.evaluateRpn(postFixRpn);
+    return result;
   }
 
 }

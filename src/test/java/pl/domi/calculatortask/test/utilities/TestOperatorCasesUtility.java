@@ -2,7 +2,7 @@ package pl.domi.calculatortask.test.utilities;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
-import pl.domi.calculatortask.app.rpn.kinds.OperatorKind;
+import pl.domi.calculatortask.app.rpn.operator.kind.OperatorKind;
 
 public class TestOperatorCasesUtility {
 

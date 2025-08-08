@@ -1,4 +1,4 @@
-package pl.domi.calculatortask.app.rpn.kinds;
+package pl.domi.calculatortask.app.rpn.operator.kind;
 
 import pl.domi.calculatortask.app.rpn.precedence.Precedence;
 

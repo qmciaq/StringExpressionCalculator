@@ -9,18 +9,18 @@ import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseInputException;
 
 class StringExpressionCalculatorTest {
 
-  private int testCompute(String expression) {
+  private Number testCompute(String expression) {
     return StringExpressionCalculator.calculate(expression);
   }
 
   @ParameterizedTest
-  @MethodSource("pl.domi.calculatortask.utilities.TestTaskStaticExamplesUtility#provideStaticExamplesForTest")
+  @MethodSource("pl.domi.calculatortask.test.utilities.TestTaskStaticExamplesUtility#provideStaticExamplesForTest")
   void shouldProperlyCalculateStaticExamples(String expression, int result) {
     assertEquals(testCompute(expression), result, "Computed value is not equal to result");
   }
 
   @ParameterizedTest
-  @MethodSource("pl.domi.calculatortask.utilities.TestExceptionGeneratingExamplesUtility#provideStaticExamplesForTest")
+  @MethodSource("pl.domi.calculatortask.test.utilities.TestExceptionGeneratingExamplesUtility#provideStaticExamplesForTest")
   void shouldThrowExpectedException(String expression, Class<? extends CalculatorBaseInputException> exceptionType) {
     assertThrows(exceptionType, () -> testCompute(expression), "For expression '%s' the exception did not match".formatted(expression));
   }

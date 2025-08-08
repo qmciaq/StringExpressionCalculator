@@ -1,44 +1,47 @@
 package pl.domi.calculatortask.app.tokenizer;
 
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import pl.domi.calculatortask.app.exceptions.input.MalformedExpressionInputException;
-import pl.domi.calculatortask.app.rpn.OperatorMatcher;
+import pl.domi.calculatortask.app.rpn.operator.OperatorMatcher;
+import pl.domi.calculatortask.app.tokenizer.kind.NumericToken;
+import pl.domi.calculatortask.app.tokenizer.kind.OperationToken;
+import pl.domi.calculatortask.app.tokenizer.kind.Token;
 import pl.domi.calculatortask.app.utility.NumericUtilities;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Tokenizer {
 
-  private static final String EXPRESSION_SEPARATOR = " ";
+  static final String EXPRESSION_SEPARATOR = " ";
 
-  public static TokenizationResult tokenize(String expression) {
+  public static List<Token> tokenize(String expression) {
     String[] rawTokens = splitIntoTokens(expression);
-    return createTokens(rawTokens);
+    return tryToTokenize(rawTokens);
   }
 
-  private static TokenizationResult createTokens(String[] rawTokens) {
-    TokenizationAccumulator tokenizationAccumulator = new TokenizationAccumulator();
-    tryToTokenize(rawTokens, tokenizationAccumulator);
-    return tokenizationAccumulator.toResult();
-  }
-
-  private static void tryToTokenize(String[] rawTokens, TokenizationAccumulator tokenizationAccumulator) {
-    IntStream.range(0, rawTokens.length).forEachOrdered(tokenIdx -> {
-      String currentToken = rawTokens[tokenIdx];
-      if (NumericUtilities.isNumeric(currentToken)) {
-        tokenizationAccumulator.addNumber(NumericUtilities.parseRequiredInt(currentToken));
+  static List<Token> tryToTokenize(String[] rawTokens) {
+    List<Token> tokens = new ArrayList<>(rawTokens.length);
+    Arrays.stream(rawTokens).forEachOrdered(token -> {
+      if (NumericUtilities.isNumeric(token)) {
+        tokens.add(NumericToken.number(NumericUtilities.parseRequiredInt(token)));
       } else {
-        assertIsNotAnOperatorAtLastPlace(rawTokens, tokenIdx, currentToken);
-        tokenizationAccumulator.pushOperator(OperatorMatcher.matchOperator(currentToken));
+        tokens.add(OperationToken.operator(OperatorMatcher.matchOperator(token)));
       }
     });
+    assertIsNotAnOperatorAtLastPlace(tokens);
+    return tokens;
   }
 
-  private static void assertIsNotAnOperatorAtLastPlace(String[] rawTokens, int tokenIdx, String currentToken) {
-    if (tokenIdx == rawTokens.length - 1) {
-      throw new MalformedExpressionInputException(currentToken);
+  static void assertIsNotAnOperatorAtLastPlace(List<Token> tokens) {
+    if (!tokens.isEmpty() && tokens.getLast().isOperator()) {
+      throw new MalformedExpressionInputException("Expression cannot end with an operator.");
     }
   }
 
-  private static String[] splitIntoTokens(String arithmeticExpression) {
+  static String[] splitIntoTokens(String arithmeticExpression) {
     return arithmeticExpression.split(EXPRESSION_SEPARATOR);
   }
 }

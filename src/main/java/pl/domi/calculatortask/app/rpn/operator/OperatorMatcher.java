@@ -1,8 +1,8 @@
-package pl.domi.calculatortask.app.rpn;
+package pl.domi.calculatortask.app.rpn.operator;
 
 import pl.domi.calculatortask.app.exceptions.NumberIsNotAnOperatorException;
 import pl.domi.calculatortask.app.exceptions.input.NotSupportedArithmeticOperatorInputException;
-import pl.domi.calculatortask.app.rpn.kinds.OperatorKind;
+import pl.domi.calculatortask.app.rpn.operator.kind.OperatorKind;
 import pl.domi.calculatortask.app.utility.NumericUtilities;
 
 public class OperatorMatcher {

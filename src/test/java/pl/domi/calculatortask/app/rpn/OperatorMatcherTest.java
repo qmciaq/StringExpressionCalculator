@@ -7,7 +7,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import pl.domi.calculatortask.app.exceptions.NumberIsNotAnOperatorException;
 import pl.domi.calculatortask.app.exceptions.input.NotSupportedArithmeticOperatorInputException;
-import pl.domi.calculatortask.app.rpn.kinds.OperatorKind;
+import pl.domi.calculatortask.app.rpn.operator.OperatorMatcher;
+import pl.domi.calculatortask.app.rpn.operator.kind.OperatorKind;
 
 class OperatorMatcherTest {
 
