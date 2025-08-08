@@ -10,7 +10,7 @@ import pl.domi.calculatortask.app.exceptions.base.CalculatorBaseInputException;
 class StringExpressionCalculatorTest {
 
   private Number testCompute(String expression) {
-    return StringExpressionCalculator.calculate(expression);
+    return StringExpressionCalculator.intCalculator().calculate(expression);
   }
 
   @ParameterizedTest
